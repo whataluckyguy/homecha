@@ -24,7 +24,7 @@ function App() {
       <div className="main">
         <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
           <InputLabel htmlFor="search-with-icon">Type to search</InputLabel>
-          <Input
+          {/* <Input
             sx={{
               borderRadius: "30px",
             }}
@@ -37,7 +37,7 @@ function App() {
                 </IconButton>
               </InputAdornment>
             }
-          ></Input>
+          ></Input> */}
         </FormControl>
       </div>
     </div>
