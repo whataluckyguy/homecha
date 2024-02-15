@@ -1,0 +1,11 @@
+.app{
+    background-color: black;
+    color: white;
+}
+.navbar{
+    display: flex;
+}
+
+.main{
+    background-color: white;
+}
