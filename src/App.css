@@ -1,11 +1,22 @@
 .app{
     background-color: black;
     color: white;
+    height: 100vh;
 }
 .navbar{
     display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
 
 .main{
-    background-color: white;
+    /* background-color: white; */
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20vh;
+}
+.cardmedia{
+    height: 140px;
+    display: grid;
+    place-items: center;
 }
