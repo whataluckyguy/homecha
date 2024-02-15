@@ -13,8 +13,8 @@ import user from "./assets/user.svg";
 //   }
 // });
 
-const formed = document.querySelector("#fr");
-const chatContainer = document.querySelector("#chat_container");
+// const formed = document.getElementById("fr");
+// const chatContainer = document.getElementById("chat_container");
 
 let loadInterval;
 
@@ -73,7 +73,13 @@ function chatStripe(isAi, value, uniqueId) {
 }
 
 function Chat() {
-  //   const [prompt, setPrompt] = useState();
+  const [formed, setFormed] = useState(null);
+  const [chatContainer, setChatContainer] = useState(null);
+
+  useEffect(() => {
+    setFormed(document.getElementById("fr"));
+    setChatContainer(document.getElementById("chat_container"));
+  }, []);
 
   const handleSubmit = async (e) => {
     console.log(formed);
@@ -88,7 +94,8 @@ function Chat() {
     chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
 
     // to clear the textarea input
-    formed.reset();
+    // formed.reset();
+    setFormed(document.getElementById("fr").reset());
 
     // bot's chatstripe
     const uniqueId = generateUniqueId();
@@ -129,10 +136,16 @@ function Chat() {
     }
   };
 
+  const enter = (event) => {
+    if (event.keyCode === 13) {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <div id="app">
       <div id="chat_container"></div>
-      <form onSubmit={handleSubmit} id="fr">
+      <form id="fr" onSubmit={handleSubmit} onKeyDown={(e) => enter(e)}>
         <textarea
           name="prompt"
           rows="1"

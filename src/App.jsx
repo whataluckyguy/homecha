@@ -44,7 +44,34 @@ function App() {
           </Typography>
         </Box>
 
-        <Typography variant="h2" color={"white"}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "60vw",
+            backgroundColor: "#6b6c6e",
+            border: "1px solid gray",
+            borderRadius: "35px",
+            paddingLeft: 1,
+            paddingRight: 2,
+            // color: "white",
+          }}
+        >
+          <IconButton>
+            <Search />
+          </IconButton>
+          <TextField
+            id="standard-basic"
+            label="Type to search..."
+            // focused
+            variant="standard"
+            fullWidth
+            color="error"
+            // sx={{ width: "80%" }}
+          />
+        </Box>
+
+        <Typography variant="h4" color={"white"}>
           Login
         </Typography>
       </div>
@@ -54,7 +81,7 @@ function App() {
           variant="outlined"
           sx={{
             width: 300,
-            minHeight: 350,
+            // minHeight: 350,
             border: "2px #ffbf00 solid",
             borderRadius: "20px",
             background: "rgb(230,229,230)",
@@ -76,6 +103,7 @@ function App() {
           </CardContent>
         </Card>
         <Card
+          onClick={() => navigate("chat")}
           variant="outlined"
           sx={{
             width: 300,
@@ -100,6 +128,7 @@ function App() {
           </CardContent>
         </Card>
         <Card
+          onClick={() => navigate("chat")}
           variant="outlined"
           sx={{
             width: 300,
