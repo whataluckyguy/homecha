@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import {
   Box,
@@ -24,12 +24,18 @@ import {
   Settings,
 } from "@mui/icons-material";
 import { Navigate, useNavigate } from "react-router-dom";
+import { UserContext } from "./Context/UserContext";
 
 function App() {
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    email: "test@deloitte.com",
+    password: "1234",
+  });
 
   return (
     <div className="app">
+      {/* <UserContext.Provider value={{ user, setUser }}> */}
       <div className="navbar">
         <Box
           sx={{
@@ -77,11 +83,10 @@ function App() {
       </div>
       <div className="main">
         <Card
-          onClick={() => navigate("chat")}
+          onClick={() => navigate("login")}
           variant="outlined"
           sx={{
             width: 300,
-            // minHeight: 350,
             border: "2px #ffbf00 solid",
             borderRadius: "20px",
             background: "rgb(230,229,230)",
@@ -103,7 +108,7 @@ function App() {
           </CardContent>
         </Card>
         <Card
-          onClick={() => navigate("chat")}
+          onClick={() => navigate("login")}
           variant="outlined"
           sx={{
             width: 300,
@@ -128,7 +133,7 @@ function App() {
           </CardContent>
         </Card>
         <Card
-          onClick={() => navigate("chat")}
+          onClick={() => navigate("login")}
           variant="outlined"
           sx={{
             width: 300,
@@ -154,6 +159,7 @@ function App() {
           </CardContent>
         </Card>
       </div>
+      {/* </UserContext.Provider> */}
     </div>
   );
 }
