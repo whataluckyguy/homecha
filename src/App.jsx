@@ -123,7 +123,11 @@ function App() {
             <Article sx={{ fontSize: 150, color: "white" }} />
           </div>
           <CardContent>
-            <Typography gutterbottom variant="h5" component={"div"}>
+            <Typography
+              // gutterbottom
+              variant="h5"
+              component={"div"}
+            >
               Misc. Invoicing
             </Typography>
             <Typography variant="body2">
@@ -149,7 +153,11 @@ function App() {
             <Settings sx={{ fontSize: 150, color: "white" }} />
           </div>
           <CardContent>
-            <Typography gutterbottom variant="h5" component={"div"}>
+            <Typography
+              // gutterbottom
+              variant="h5"
+              component={"div"}
+            >
               Invoice Adjustment
             </Typography>
             <Typography variant="body2">

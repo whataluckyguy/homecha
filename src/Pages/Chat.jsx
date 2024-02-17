@@ -16,48 +16,57 @@ import user from "./assets/user.svg";
 // const formed = document.getElementById("fr");
 // const chatContainer = document.getElementById("chat_container");
 
-let loadInterval;
+function Chat() {
+  const [formed, setFormed] = useState(null);
+  const [chatContainer, setChatContainer] = useState(null);
 
-function loader(element) {
-  element.textContent = "";
+  useEffect(() => {
+    setFormed(document.getElementById("fr"));
+    setChatContainer(document.getElementById("chat_container"));
+  }, []);
 
-  loadInterval = setInterval(() => {
-    // Update the text content of the loading indicator
-    element.textContent += ".";
+  let loadInterval;
 
-    // If the loading indicator has reached three dots, reset it
-    if (element.textContent === "....") {
-      element.textContent = "";
-    }
-  }, 300);
-}
+  function loader(element) {
+    element.textContent = "";
 
-function typeText(element, text) {
-  let index = 0;
+    loadInterval = setInterval(() => {
+      // Update the text content of the loading indicator
+      element.textContent += ".";
 
-  let interval = setInterval(() => {
-    if (index < text.length) {
-      element.innerHTML += text.charAt(index);
-      index++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 20);
-}
+      // If the loading indicator has reached three dots, reset it
+      if (element.textContent === "....") {
+        element.textContent = "";
+      }
+    }, 300);
+  }
 
-// generate unique ID for each message div of bot
-// necessary for typing text effect for that specific reply
-// without unique ID, typing text will work on every element
-function generateUniqueId() {
-  const timestamp = Date.now();
-  const randomNumber = Math.random();
-  const hexadecimalString = randomNumber.toString(16);
+  function typeText(element, text) {
+    let index = 0;
 
-  return `id-${timestamp}-${hexadecimalString}`;
-}
+    let interval = setInterval(() => {
+      if (index < text.length) {
+        element.innerHTML += text.charAt(index);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20);
+  }
 
-function chatStripe(isAi, value, uniqueId) {
-  return `
+  // generate unique ID for each message div of bot
+  // necessary for typing text effect for that specific reply
+  // without unique ID, typing text will work on every element
+  function generateUniqueId() {
+    const timestamp = Date.now();
+    const randomNumber = Math.random();
+    const hexadecimalString = randomNumber.toString(16);
+
+    return `id-${timestamp}-${hexadecimalString}`;
+  }
+
+  function chatStripe(isAi, value, uniqueId) {
+    return `
           <div class="wrapper ${isAi && "ai"}">
               <div class="chat">
                   <div class="profile">
@@ -70,39 +79,42 @@ function chatStripe(isAi, value, uniqueId) {
               </div>
           </div>
       `;
-}
-
-function Chat() {
-  const [formed, setFormed] = useState(null);
-  const [chatContainer, setChatContainer] = useState(null);
-
-  useEffect(() => {
-    setFormed(document.getElementById("fr"));
-    setChatContainer(document.getElementById("chat_container"));
-  }, []);
+  }
 
   const handleSubmit = async (e) => {
-    console.log(formed);
+    // console.log(formed);
     e.preventDefault();
 
     // const data = new FormData(document.querySelector("form"));
     // const data = new FormData(form);
-    const data = new FormData(formed);
+    const data = new FormData(document.querySelector("form"));
     // console.log(data.get("prompt"));
 
     // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+    document.querySelector("#chat_container").innerHTML += chatStripe(
+      false,
+      data.get("prompt")
+    );
+    // chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
 
     // to clear the textarea input
     // formed.reset();
-    setFormed(document.getElementById("fr").reset());
+    document.querySelector("form").reset();
+    // setFormed(document.getElementById("fr").reset());
 
     // bot's chatstripe
     const uniqueId = generateUniqueId();
-    chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
+    document.querySelector("#chat_container").innerHTML += chatStripe(
+      true,
+      " ",
+      uniqueId
+    );
+    // chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
     // to focus scroll to the bottom
-    chatContainer.scrollTop = chatContainer.scrollHeight;
+    document.querySelector("#chat_container").scrollTop =
+      chatContainer.scrollHeight;
+    // chatContainer.scrollTop = chatContainer.scrollHeight;
 
     // specific message div
     const messageDiv = document.getElementById(uniqueId);
